@@ -2,6 +2,7 @@
 *.apk
 *.ap_
 
+
 # Files for the ART/Dalvik VM
 *.dex
 
@@ -26,15 +27,37 @@ proguard/
 # Log Files
 *.log
 
+# Signing files
+.signing/
+
 # Android Studio Navigation editor temp files
 .navigation/
 
 # Android Studio captures folder
 captures/
 
-# Intellij
-*.iml
+# User-specific configurations
+.idea/libraries/
 .idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+*.iml
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Keystore files
 *.jks
