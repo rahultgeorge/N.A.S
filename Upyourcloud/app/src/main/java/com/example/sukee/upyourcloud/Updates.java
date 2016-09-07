@@ -1,13 +1,12 @@
 package com.example.sukee.upyourcloud;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Updates extends AppCompatActivity {
+public class Updates extends NaviDrawer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_updates);
-    }
+        getLayoutInflater().inflate(R.layout.activity_updates,layout);
+        pos=5;    }
 }

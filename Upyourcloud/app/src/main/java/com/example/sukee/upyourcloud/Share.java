@@ -1,13 +1,12 @@
 package com.example.sukee.upyourcloud;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Share extends AppCompatActivity {
+public class Share extends NaviDrawer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share);
-    }
+        getLayoutInflater().inflate(R.layout.activity_share,layout);
+        pos=4;    }
 }
