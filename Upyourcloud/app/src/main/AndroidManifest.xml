@@ -20,6 +20,26 @@
             android:name=".Home"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name=".Backup"
+            android:label="@string/title_activity_backup" >
+        </activity>
+        <activity
+            android:name=".MyDevices"
+            android:label="@string/title_activity_my_devices" >
+        </activity>
+        <activity
+            android:name=".Share"
+            android:label="@string/title_activity_share" >
+        </activity>
+        <activity
+            android:name=".MyDrive"
+            android:label="@string/title_activity_my_drive" >
+        </activity>
+        <activity
+            android:name=".Updates"
+            android:label="@string/title_activity_updates" >
+        </activity>
     </application>
 
 </manifest>
