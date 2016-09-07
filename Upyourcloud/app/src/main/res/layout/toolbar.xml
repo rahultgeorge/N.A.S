@@ -10,10 +10,15 @@
 <RelativeLayout android:layout_height="wrap_content"
                 android:layout_width="match_parent"
            >
+
     <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content" android:layout_centerHorizontal="true"
+              android:layout_height="wrap_content"
               android:text="Up Your Cloud"
+              android:layout_centerVertical="true"
+              android:layout_centerHorizontal="true"
               android:textColor="@color/White"
-                 android:textSize="24sp"/>
+              android:textSize="24sp"/>
+
+
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>
