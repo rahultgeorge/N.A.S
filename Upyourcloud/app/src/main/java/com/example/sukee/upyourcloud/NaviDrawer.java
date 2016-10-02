@@ -60,6 +60,7 @@ public class NaviDrawer extends AppCompatActivity {
                 }
             }
         });
+       
     }
 
 
