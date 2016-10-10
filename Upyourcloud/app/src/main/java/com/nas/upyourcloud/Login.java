@@ -1,4 +1,4 @@
-package com.example.sukee.upyourcloud;
+package com.nas.upyourcloud;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Home.class));
+                startActivity(new Intent(getApplicationContext(), Backup.class));
                 finish();;
             }
         });

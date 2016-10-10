@@ -1,5 +1,4 @@
-package com.example.sukee.upyourcloud;
-
+package com.nas.upyourcloud;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

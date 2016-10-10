@@ -1,8 +1,10 @@
-package com.example.sukee.upyourcloud;
+package com.nas.upyourcloud;
 
 import android.os.Bundle;
 
 public class MyDevices extends NaviDrawer {
+
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

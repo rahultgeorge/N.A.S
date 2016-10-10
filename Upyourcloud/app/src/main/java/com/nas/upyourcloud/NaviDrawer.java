@@ -1,4 +1,5 @@
-package com.example.sukee.upyourcloud;
+package com.nas.upyourcloud;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import com.nas.upyourcloud.Backup;
+import com.nas.upyourcloud.MyDrive;
+import com.nas.upyourcloud.Share;
+import com.nas.upyourcloud.Updates;
+
 
 public class NaviDrawer extends AppCompatActivity {
 

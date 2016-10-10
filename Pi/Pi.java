@@ -11,7 +11,7 @@ public class Pi
         public static void main(String []args)throws IOException
         {
                 ServerSocket ss=new ServerSocket(port);
-                ss.setSoTimeout(10000);
+                //ss.setSoTimeout(10000);
                 Scanner sc = new Scanner(System.in);
                 int inp;
                 File f=null;
@@ -19,6 +19,7 @@ public class Pi
                 float count=0;
 		 float kb=0;
 		 float bytesRead = 0;
+		 long start,end ;
 		 long file_size=0;
 		 String f_name=null;
 		 buffer=new byte[1024*1024];
@@ -44,16 +45,18 @@ public class Pi
 		System.out.println("FILE TO BE BACKED UP SIZE(KB): "+file_size);
 		count=0;
 		while( Math.ceil(count)<file_size && (bytesRead=s_in.read(buffer))>0 )
-		       {											System.out.println("Bytes read: "+ bytesRead);
+		       {											
+			System.out.println("Bytes read: "+ bytesRead);
 			f_out.write(buffer,0,(int)bytesRead);
+			f_out.flush();
 			kb=bytesRead/1024;
 			System.out.println("KB read: "+kb);
 			count+=kb;
 			System.out.println("Total writen into file (KB): "+count);
 			System.out.println(Math.ceil(count));
+			f_out.flush();
 		       }
 			System.out.println("Successfull");
-
 			f_out.flush();
 		}
                else if(f_name.equals(ret))
@@ -67,18 +70,22 @@ public class Pi
 		  file_size=f.length()/(1024);
 		  System.out.println("FILE TO BE SENT SIZE(KB): "+file_size);
 		  s_out.writeLong(file_size);
+                 s_out.flush();
 		  count=0;
+		 start=System.nanoTime();
 		   while( Math.ceil(count)<file_size && (bytesRead=f_in.read(buffer))>0 )
-		       {											System.out.println("Bytes read: "+ bytesRead);
+		       {											
+			System.out.println("Bytes read: "+ bytesRead);
 			s_out.write(buffer,0,(int)bytesRead);
 			kb=bytesRead/1024;
 			System.out.println("KB read: "+kb);
 			count+=kb;
 			System.out.println("Total writen to socket os(KB): "+count);
+			//s_out.flush();
 
 		       }
-			
-			System.out.println("Success");
+			end=System.nanoTime();
+			System.out.println("Success: "+( (end-start)/1000000000) );
 			s_out.flush();
 
 		}

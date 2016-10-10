@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.sukee.upyourcloud.Login">
+    tools:context="com.nas..upyourcloud.Login">
 
     <include layout="@layout/toolbar" ></include>
     <Button
