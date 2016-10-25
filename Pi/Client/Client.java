@@ -116,7 +116,7 @@ else
             }
 
 		
-                buffer=new byte[4*1024];
+                buffer=new byte[1024*1024];
 
 		count=0;
                

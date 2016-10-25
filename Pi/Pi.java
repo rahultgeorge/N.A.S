@@ -31,7 +31,7 @@ public class Pi
            this.s=s;
            System.out.println((++client) +" client(s) connected");
           
-           buffer=new byte[4*1024];
+           buffer=new byte[1024*1024];
           }
 
 	
