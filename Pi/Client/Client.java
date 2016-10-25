@@ -39,7 +39,7 @@ Scanner sc=new Scanner(System.in);
 		
 String f_name;
 	
-Socket s = new Socket("192.168.137.199",1234);
+Socket s = new Socket("192.168.1.254",1234);
      
 while(true)
               
@@ -116,7 +116,7 @@ else
             }
 
 		
-                buffer=new byte[1024*1024];
+                buffer=new byte[4*1024];
 
 		count=0;
                
