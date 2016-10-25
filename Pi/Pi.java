@@ -6,37 +6,44 @@ public class Pi
 {
         private static final int port = 1234;
 	private static final String ret="retrieve";
-	private static final String exit="exit";
+        private static int client;
 
-        public static void main(String []args)throws IOException
-        {
-                ServerSocket ss=new ServerSocket(port);
-                //ss.setSoTimeout(10000);
-                Scanner sc = new Scanner(System.in);
-                int inp;
-                File f=null;
-                byte[] buffer;
-                float count=0;
+        private class FTP extends Thread 
+       {
+                 Socket s;
+                 int inp;
+                 File f=null;
+                 byte[] buffer;
+                 float count=0;
 		 float kb=0;
 		 float bytesRead = 0;
 		 long start,end ;
 		 long file_size=0;
 		 String f_name=null;
-		 buffer=new byte[1024*1024];
+		
 		 DataInputStream s_in = null;
          	 DataOutputStream s_out = null;
 	 	 DataInputStream f_in = null;
          	 DataOutputStream f_out = null;
-		 System.out.println("Waiting to connect");
-                Socket s=ss.accept();
-                System.out.println("Connected");
-		 s_in = new DataInputStream(s.getInputStream());
-		 s_out = new DataOutputStream(s.getOutputStream());
+		 
+          FTP(Socket s)
+         {
+           this.s=s;
+           System.out.println((++client) +" client(s) connected");
+          
+           buffer=new byte[4*1024];
+          }
 
+	
+       public void run()
+      {
+                try
+	        {
+                 s_in = new DataInputStream(s.getInputStream());
+                 s_out = new DataOutputStream(s.getOutputStream()); 
 		for(;;)
 		{
-		 try
-	{
+		 
 		if((f_name=s_in.readUTF())!=null && !f_name.equals(ret))
 		{
 			//Back up
@@ -89,24 +96,44 @@ public class Pi
 			s_out.flush();
 
 		}
-		else if(f_name.equals(exit))
+		else
 		{
-		 //exit condition
-		  System.out.println("Socket go bye bye");
 		  s_out.close();
 		  s_in.close();
 		  s.close();
+		
 		}
+		
 		//send updates condition should be added
 		}
-		catch(EOFException e)
+		}
+		catch(Exception e)
 		{
 		 System.out.println(e);
+		   System.out.println("Socket go bye bye");
+		
 		 System.out.println("Socket connection terminated");
-		 break;
+		 
 		}
+           
+          System.out.println("Client disconnected now clients: "+(--client));
+	  return ;
+        } 
+        }
 
 
-		}
+        public static void main(String []args)throws IOException
+        {
+                Pi obj=new Pi();
+                System.out.println("Test");
+                ServerSocket ss=new ServerSocket(port);
+                //ss.setSoTimeout(10000);
+                System.out.println("Waiting to connect");
+                while(true)
+                obj.new FTP(ss.accept()).start();
+               // System.out.println("Connected");
+		 
+		 
+		
         }
 }
