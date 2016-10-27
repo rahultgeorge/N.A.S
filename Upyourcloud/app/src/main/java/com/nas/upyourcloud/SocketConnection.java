@@ -1,5 +1,7 @@
 package com.nas.upyourcloud;
 
+import android.content.ContentResolver;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.*;
@@ -19,7 +21,7 @@ public class SocketConnection {
     final String ret = "retrieve";
     final String exit = "exit";
     Socket s;
-    final String serverAddress = "192.168.1.35";
+    final String serverAddress = "192.168.1.34";
     byte[] buffer;
     float bytesRead = 0;
     float kb = 0;
@@ -42,14 +44,14 @@ public class SocketConnection {
         return s.isConnected();
     }
 
-    public void backUp(File file) throws IOException {
+    public void backUp(ContentResolver resolver,Uri file,String name , long file_size) throws IOException {
 
         //Send to the pi
-        Log.d(TAG, "File name  is: " + file.getName());
-        in = new DataInputStream(new FileInputStream(file));
+        Log.d(TAG, "File name  is: " + name);
+        in = new DataInputStream(resolver.openInputStream(file));
         out = new DataOutputStream(s.getOutputStream());
-        out.writeUTF(file.getName());
-        file_size = (file.length() / 1024);
+        out.writeUTF(name);
+        file_size = (file_size / 1024);
         Log.d(TAG, "File size(KB): " + file_size);
         out.writeLong(file_size);
         out.flush();
