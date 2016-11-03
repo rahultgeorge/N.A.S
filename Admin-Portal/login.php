@@ -22,7 +22,7 @@
    		echo "Logged in";
              session_start();
              $_SESSION['lflag']=1;
-             header("location:test.html");
+             header("location:List.php");
                exit;
          
      }

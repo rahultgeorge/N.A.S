@@ -31,7 +31,7 @@ public class Pi
            this.s=s;
            System.out.println((++client) +" client(s) connected");
           
-           buffer=new byte[1024*1024];
+           buffer=new byte[16*1024];
           }
 
 	
@@ -47,7 +47,7 @@ public class Pi
 		if((f_name=s_in.readUTF())!=null && !f_name.equals(ret))
 		{
 			//Back up
-		f_out = new DataOutputStream(new FileOutputStream(f_name));
+		f_out = new DataOutputStream(new FileOutputStream("Files/"+f_name,false));
 		file_size=s_in.readLong();
 		System.out.println("FILE TO BE BACKED UP SIZE(KB): "+file_size);
 		count=0;
@@ -96,13 +96,6 @@ public class Pi
 			s_out.flush();
 
 		}
-		else
-		{
-		  s_out.close();
-		  s_in.close();
-		  s.close();
-		
-		}
 		
 		//send updates condition should be added
 		}
@@ -111,10 +104,18 @@ public class Pi
 		{
 		 System.out.println(e);
 		   System.out.println("Socket go bye bye");
-		
-		 System.out.println("Socket connection terminated");
-		 
-		}
+		  System.out.println("Socket connection terminated");
+	          try
+                  {    	
+         	  s_out.close();
+		  s_in.close();
+		  s.close();	 
+		  }
+                  catch(Exception e1)
+                  {
+                  
+                  }   
+                }
            
           System.out.println("Client disconnected now clients: "+(--client));
 	  return ;
