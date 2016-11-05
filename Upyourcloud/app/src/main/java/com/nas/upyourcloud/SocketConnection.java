@@ -21,7 +21,7 @@ public class SocketConnection {
     final String ret = "retrieve";
     final String exit = "exit";
     Socket s;
-    final String serverAddress = "192.168.1.34";
+    final String serverAddress = "192.168.1.254";
     byte[] buffer;
     float bytesRead = 0;
     float kb = 0;
@@ -31,7 +31,7 @@ public class SocketConnection {
 
     SocketConnection() {
         sc = new Scanner(System.in);
-        buffer = new byte[1024 * 1024];
+        buffer = new byte[16 * 1024];
     }
 
     public  boolean connect()
@@ -57,7 +57,7 @@ public class SocketConnection {
         out.flush();
         count = 0;
         Log.d(TAG, "Writing has begun");
-        while (count <= file_size && (bytesRead = in.read(buffer)) > 0) {
+        while (count < file_size && (bytesRead = in.read(buffer)) > 0) {
             //Log.d(TAG, "Bytes read: " + bytesRead);
             out.write(buffer, 0, (int) bytesRead);
             kb = bytesRead / 1024;
@@ -89,7 +89,7 @@ public class SocketConnection {
 
         count = 0;
         Log.d(TAG, "Writing has begun");
-        while (count <= file_size && (bytesRead = in.read(buffer)) > 0) {
+        while (Math.ceil(count) < file_size && (bytesRead = in.read(buffer)) > 0) {
             //Log.d(TAG, "Bytes read: " + bytesRead);
             out.write(buffer, 0, (int) bytesRead);
             kb = bytesRead / 1024;

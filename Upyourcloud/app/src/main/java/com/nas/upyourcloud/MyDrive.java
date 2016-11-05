@@ -97,13 +97,19 @@ public class MyDrive extends NaviDrawer {
 
     private void setList()
     {
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                newThread(i);
-                socket_thread.start();
+            public void run() {
+                listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, list));
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        newThread(i);
+                        socket_thread.start();
+                    }
+                });
             }
         });
+
     }
 }
