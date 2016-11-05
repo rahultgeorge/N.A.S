@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -147,8 +148,13 @@ public class Backup {
 	}
 
 	public void BackUp(String file){
-		Client client = new Client();
-		client.c = 1;
-		client.fileString = file;
+		Client.c = 1;
+		Client.fileString = file;
+		try {
+			Client.main(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

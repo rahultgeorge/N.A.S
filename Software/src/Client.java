@@ -9,7 +9,7 @@ public class Client{
 	File file;
 	static long file_size=0;
 	static Socket s;
-	String fileString;
+	static String fileString;
 	
 	public static void main(String []args)throws IOException{
 		byte[] buffer ;        
