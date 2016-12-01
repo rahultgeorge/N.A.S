@@ -152,7 +152,7 @@ public class Backup {
 		Client.fileString = file;
 		try {
 			Client.main(null);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -11,15 +11,9 @@ public class Client{
 	static Socket s;
 	static String fileString;
 	
-	public static void main(String []args)throws IOException{
-		byte[] buffer ;        
-		float bytesRead=0;
-		float kb=0;
-		float count=0;
- 		long start,end; 		
-		
- 		Client client = new Client();
- 		s = new Socket("192.168.1.254",1234);
+	public static void main(String []args)throws Exception{
+		Client client = new Client();
+ 		s = new Socket("localhost",1234);
 		while(true){
 		     if(c==1){
                 //Send to the pi
@@ -33,30 +27,19 @@ public class Client{
 		    	 System.out.println("Socket connection terminated");
 		    	 break;
 		     }
-		     
-		     buffer=new byte[16*1024];
-		     count=0;
-		     System.out.println("Writing has begun");
-		     start=System.nanoTime();
-		     while(count<=file_size && (bytesRead=in.read(buffer))>0 ){											
-                System.out.println("Bytes read: "+ bytesRead);
-                out.write(buffer,0,(int)bytesRead);
-                kb=bytesRead/1024;
-                System.out.println("KB read: "+kb);
-                count+=kb;
-                System.out.println("Total writen to socket os(KB): "+count);	      
-		     }	
-		     end=System.nanoTime();
-		     System.out.println("Time taken to read (MBS): "+ (   (file_size/1024)   /   ((end-start)/1000000000) ));
-		     out.flush();
 		}
 		out.close();
 		in.close();
 		s.close();
 	}
 	
-	private void BackUp(){					
-   	 	try {
+	private void BackUp() throws Exception{					
+		byte[] buffer ;        
+		float bytesRead=0;
+		float kb=0;
+		float count=0;
+ 		long start,end; 
+ 		try {
    	 		file = new File(fileString);
 			in = new DataInputStream(new FileInputStream(file));
 		} 
@@ -76,10 +59,31 @@ public class Client{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+   	 	buffer=new byte[16*1024];
+   	 	count=0;
+   	 	System.out.println("Writing has begun");
+   	 	start=System.nanoTime();
+   	 	while(count<=file_size && (bytesRead=in.read(buffer))>0 ){											
+   	 		System.out.println("Bytes read: "+ bytesRead);
+   	 		String enc = AES.encrypt(buffer.toString());
+   	 		out.write(enc.getBytes(),0,enc.length());
+   	 		kb=bytesRead/1024;
+   	 		System.out.println("KB read: "+kb);
+   	 		count+=kb;
+   	 		System.out.println("Total writen to socket os(KB): "+count);	      
+   	 	}	
+   	 	end=System.nanoTime();
+   	 	//System.out.println("Time taken to read (MBS): "+ (   (file_size/1024)   /   ((end-start)/1000000000) ));
+   	 	out.flush();
 	}
 	
-	private void Retrieve(){
-		try {
+	private void Retrieve() throws Exception{
+		byte[] buffer ;        
+		float bytesRead=0;
+		float kb=0;
+		float count=0;
+ 		long start,end; 
+ 		try {
 			out= new  DataOutputStream(s.getOutputStream());		 
 			out.writeUTF(ret);
 			out.writeUTF(file.toString());
@@ -92,5 +96,21 @@ public class Client{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		buffer=new byte[16*1024];
+	    count=0;
+	    System.out.println("Writing has begun");
+	    start=System.nanoTime();
+	    while(count<=file_size && (bytesRead=in.read(buffer))>0 ){											
+           System.out.println("Bytes read: "+ bytesRead);
+           String dec = AES.encrypt(buffer.toString());
+  	 	out.write(dec.getBytes(),0,(int)bytesRead);
+           kb=bytesRead/1024;
+           System.out.println("KB read: "+kb);
+           count+=kb;
+           System.out.println("Total writen to socket os(KB): "+count);	      
+	     }	
+	     end=System.nanoTime();
+	     //System.out.println("Time taken to read (MBS): "+ (   (file_size/1024)   /   ((end-start)/1000000000) ));
+	     out.flush();
 	}
 }
